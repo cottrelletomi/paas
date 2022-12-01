@@ -20,7 +20,7 @@ public class HeartRateController {
 
     @PostMapping
     public ResponseEntity<String> sendHeartRate(@RequestBody HeartRate heartRate){
-        heartRateProducer.sendHeartRate(heartRate);
+        heartRateProducer.sendMessage(heartRate);
         return ResponseEntity.ok("HeartRate sent to RabbitMQ ...");
     }
 }

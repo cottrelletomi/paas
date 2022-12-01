@@ -1,6 +1,6 @@
-package com.example.heartratesensordatacollector.producers;
+package com.example.heartratesensorworker.producers;
 
-import com.example.heartratesensordatacollector.models.HeartRate;
+import com.example.heartratesensorworker.models.HeartRate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -8,19 +8,19 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HeartRateProducer {
+public class EmergencyProducer {
 
     @Value("${rabbitmq.exchange.name}")
     private String exchange;
 
-    @Value("${rabbitmq.routing.key}")
+    @Value("${rabbitmq.routing.emergency.key}")
     private String routingKey;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(HeartRateProducer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmergencyProducer.class);
 
     private RabbitTemplate rabbitTemplate;
 
-    public HeartRateProducer(RabbitTemplate rabbitTemplate) {
+    public EmergencyProducer(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
 
