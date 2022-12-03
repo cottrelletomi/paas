@@ -1,32 +1,16 @@
 version: "3"
 services:
-  heart-rate-sensor-data-collector:
-    container_name: heart-rate-sensor-data-collector
-    image: tomi1912/heart-rate-sensor-data-collector:1.0.1
-    environment:
-      - RABBITMQ_HOST=rabbitmq
-      - RABBITMQ_PORT=5672
-      - RABBITMQ_USERNAME=guest
-      - RABBITMQ_PASSWORD=guest
-    ports:
-      - "3001:3001"
-    depends_on:
-      - rabbitmq
-  heart-rate-sensor-worker:
-    container_name: heart-rate-sensor-worker
-    image: tomi1912/heart-rate-sensor-worker:1.0.1
-    environment:
-      - RABBITMQ_HOST=rabbitmq
-      - RABBITMQ_PORT=5672
-      - RABBITMQ_USERNAME=guest
-      - RABBITMQ_PASSWORD=guest
-    ports:
-      - "3002:3002"
-    depends_on:
-      - rabbitmq
   rabbitmq:
     container_name: rabbitmq
     image: rabbitmq:3.10-management
     ports:
       - "15672:15672"
       - "5672:5672"
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
