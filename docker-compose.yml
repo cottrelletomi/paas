@@ -1,16 +1,26 @@
 version: "3"
 services:
   rabbitmq:
-    container_name: rabbitmq
+    container_name: paas-rabbitmq
     image: rabbitmq:3.10-management
     ports:
       - "15672:15672"
       - "5672:5672"
   mongodb:
-    container_name: mongodb
+    container_name: paas-mongodb
     image: mongo
     ports:
       - "27017:27017"
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=root
+  mysql:
+    container_name: paas-mysql
+    image: mysql
+    ports:
+      - "3306:3306"
+    command: --init-file /data/application/init.sql
+    volumes:
+      - ./user/init.sql:/data/application/init.sql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
