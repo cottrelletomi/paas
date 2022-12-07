@@ -33,6 +33,11 @@ public class UserController {
         return userService.getUser(id);
     }
 
+    @GetMapping("/search")
+    public Optional<User> getUserByEmail(@RequestParam("email") String email) {
+        return userService.getUserByEmail(email);
+    }
+
     //UPDATE
     @PutMapping("/{id}")
     public User setUser(@PathVariable("id") int id, @RequestBody User user) {
