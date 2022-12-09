@@ -1,4 +1,4 @@
-package com.example.heartratesensorworker.config;
+package com.example.heartratesensordatacollector.config;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -15,26 +15,15 @@ public class RabbitConfig {
     @Value("${rabbitmq.queue.name}")
     private String queue;
 
-    @Value("${rabbitmq.queue.emergency.name}")
-    private String emergencyQueue;
-
     @Value("${rabbitmq.exchange.name}")
     private String exchange;
 
     @Value("${rabbitmq.routing.key}")
     private String routingKey;
 
-    @Value("${rabbitmq.routing.emergency.key}")
-    private String routingEmergencyKey;
-
     @Bean
     public Queue queue(){
         return new Queue(queue);
-    }
-
-    @Bean
-    public Queue emergencyQueue(){
-        return new Queue(emergencyQueue);
     }
 
     @Bean
@@ -49,14 +38,6 @@ public class RabbitConfig {
                 .bind(queue())
                 .to(exchange())
                 .with(routingKey);
-    }
-
-    @Bean
-    public Binding emergencyBinding(){
-        return BindingBuilder
-                .bind(emergencyQueue())
-                .to(exchange())
-                .with(routingEmergencyKey);
     }
 
     @Bean

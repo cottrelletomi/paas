@@ -1,4 +1,4 @@
-package com.example.heartratesensordatacollector.config;
+package com.example.emergencynotificationagent.config;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -10,20 +10,31 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class Config {
+public class RabbitConfig {
 
-    @Value("${rabbitmq.queue.name}")
-    private String queue;
+    @Value("${rabbitmq.queue.notification.name}")
+    private String notificationQueue;
+
+    @Value("${rabbitmq.queue.emergency.name}")
+    private String emergencyQueue;
 
     @Value("${rabbitmq.exchange.name}")
     private String exchange;
 
-    @Value("${rabbitmq.routing.key}")
-    private String routingKey;
+    @Value("${rabbitmq.routing.notification.key}")
+    private String routingNotificationKey;
+
+    @Value("${rabbitmq.routing.emergency.key}")
+    private String routingEmergencyKey;
 
     @Bean
-    public Queue queue(){
-        return new Queue(queue);
+    public Queue notificationQueue(){
+        return new Queue(notificationQueue);
+    }
+
+    @Bean
+    public Queue emergencyQueue(){
+        return new Queue(emergencyQueue);
     }
 
     @Bean
@@ -33,11 +44,19 @@ public class Config {
 
     // binding between queue and exchange using routing key
     @Bean
-    public Binding binding(){
+    public Binding notificationBinding(){
         return BindingBuilder
-                .bind(queue())
+                .bind(notificationQueue())
                 .to(exchange())
-                .with(routingKey);
+                .with(routingNotificationKey);
+    }
+
+    @Bean
+    public Binding emergencyBinding(){
+        return BindingBuilder
+                .bind(emergencyQueue())
+                .to(exchange())
+                .with(routingEmergencyKey);
     }
 
     @Bean

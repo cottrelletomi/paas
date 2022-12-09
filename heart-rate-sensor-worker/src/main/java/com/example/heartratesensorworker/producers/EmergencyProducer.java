@@ -1,6 +1,7 @@
 package com.example.heartratesensorworker.producers;
 
 import com.example.heartratesensorworker.models.HeartRate;
+import com.example.heartratesensorworker.models.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

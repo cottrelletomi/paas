@@ -35,7 +35,7 @@ public class HeartRateConsumer {
     @RabbitListener(queues = {"${rabbitmq.queue.name}"})
     public void consumeMessage(HeartRate heartRate) {
         LOGGER.info(String.format("Received message -> %s", heartRate.toString()));
-        checkUserSubscribing(heartRate);
+        //checkUserSubscribing(heartRate);
         checkEmergency(heartRate);
         //storeData(heartRate);
         //testStoreData();
@@ -56,7 +56,7 @@ public class HeartRateConsumer {
 
     private void checkEmergency(HeartRate heartRate) {
         LOGGER.info(String.format("Check emergency"));
-        //emergencyProducer.sendMessage(heartRate);
+        emergencyProducer.sendMessage(heartRate);
     }
 
     private void storeData(HeartRate heartRate) {
