@@ -1,6 +1,6 @@
 package com.example.emergencynotificationagent.repositories;
 
-import com.example.emergencynotificationagent.models.UserRedis;
+import org.example.core.models.UserRedis;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

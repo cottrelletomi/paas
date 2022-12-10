@@ -1,7 +1,6 @@
 package com.example.emergencynotificationagent.producers;
 
-import com.example.emergencynotificationagent.models.HeartRate;
-import com.example.emergencynotificationagent.models.UserRedis;
+import org.example.core.models.UserRedis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -14,8 +13,8 @@ public class NotificationProducer {
     @Value("${rabbitmq.exchange.name}")
     private String exchange;
 
-    @Value("${rabbitmq.routing.notification.key}")
-    private String routingKey;
+    /*@Value("${rabbitmq.routing.notification.key}")
+    private String routingKey;*/
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NotificationProducer.class);
 
@@ -25,7 +24,7 @@ public class NotificationProducer {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void sendMessage(UserRedis userRedis){
+    public void sendMessage(UserRedis userRedis, String routingKey){
         LOGGER.info(String.format("UserRedis sent -> %s", userRedis.toString()));
         rabbitTemplate.convertAndSend(exchange, routingKey, userRedis);
     }

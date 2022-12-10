@@ -1,5 +1,6 @@
-package com.example.emergencynotificationagent.models;
+package org.example.core.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
@@ -22,7 +23,7 @@ public class UserRedis implements Serializable {
     private String gender;
     private int training_factor;
 
-    public UserRedis(String id, String firstname, String lastname, String email, String password, int age, int weight, String gender, int training_factor) {
+    public UserRedis(@JsonProperty("id") String id, @JsonProperty("firstname") String firstname, @JsonProperty("lastname") String lastname, @JsonProperty("email") String email, @JsonProperty("password") String password, @JsonProperty("age") int age, @JsonProperty("weight") int weight, @JsonProperty("gender") String gender, @JsonProperty("training_factor") int training_factor) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;

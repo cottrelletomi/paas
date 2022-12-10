@@ -2,10 +2,10 @@ package com.example.emergencynotificationagent.consumers;
 
 import com.example.emergencynotificationagent.models.HeartRate;
 import com.example.emergencynotificationagent.models.User;
-import com.example.emergencynotificationagent.models.UserRedis;
 import com.example.emergencynotificationagent.producers.NotificationProducer;
 import com.example.emergencynotificationagent.repositories.UserRedisRepository;
 import com.example.emergencynotificationagent.repositories.UserRepository;
+import org.example.core.models.UserRedis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -48,7 +48,7 @@ public class EmergencyConsumer {
             System.out.println("Saved in redis >>>>>>> " + ur);
             UserRedis res = userRedisRepository.findById(Integer.toString(u.getId())).get();
             System.out.println("Find in redis >>>>>>> " + res);
-            notificationProducer.sendMessage(res);
+            notificationProducer.sendMessage(res, "notification_coach_1");
             System.out.println("Send to notification queue");
 
         } else {
