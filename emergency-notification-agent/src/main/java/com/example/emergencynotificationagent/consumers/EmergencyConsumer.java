@@ -1,7 +1,7 @@
 package com.example.emergencynotificationagent.consumers;
 
 import com.example.emergencynotificationagent.models.HeartRate;
-import com.example.emergencynotificationagent.models.User;
+import org.example.core.models.User;
 import com.example.emergencynotificationagent.producers.NotificationProducer;
 import com.example.emergencynotificationagent.repositories.UserRedisRepository;
 import com.example.emergencynotificationagent.repositories.UserRepository;
@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,24 +37,23 @@ public class EmergencyConsumer {
 
     private void coachMobileNotifying(HeartRate heartRate) {
         LOGGER.info(String.format("Coach mobile notifying"));
-        LOGGER.info(String.format("Received message -> %s", heartRate.toString()));
-        Optional<User> user = this.userRepository.findUserByEmail(heartRate.getEmail());
-        if (user.isPresent()) {
-            User u = user.get();
-            UserRedis ur = new UserRedis(Integer.toString(u.getId()),
-                    u.getFirstname(), u.getLastname(),
-                    u.getEmail(), u.getPassword(),
-                    u.getAge(), u.getWeight(),
-                    Character.toString(u.getGender()), u.getTraining_factor());
-            userRedisRepository.save(ur);
-            System.out.println("Saved in redis >>>>>>> " + ur);
-            UserRedis res = userRedisRepository.findById(Integer.toString(u.getId())).get();
-            System.out.println("Find in redis >>>>>>> " + res);
-            notificationProducer.sendMessage(res, "notification_coach_1");
-            System.out.println("Send to notification queue");
+        List<UserRedis> coach = new ArrayList<>();
 
+        Iterable<UserRedis> iterable = this.userRedisRepository.findAll();
+        iterable.forEach(coach::add);
+
+        if(!coach.isEmpty()) {
+            LOGGER.info(String.format("%d coach(es) is(are) present in the gym", coach.size()));
+            Optional<User> user = this.userRepository.findUserByEmail(heartRate.getEmail());
+            if (user.isPresent()) {
+                for(UserRedis c: coach) {
+                    notificationProducer.sendMessage(user.get(), "notification_coach_" + c.getId());
+                }
+            } else {
+                LOGGER.info(String.format("Unknown user"));
+            }
         } else {
-            System.out.println("NOOOOOOO");
+            LOGGER.info(String.format("No coach is present in the gym"));
         }
     }
 }

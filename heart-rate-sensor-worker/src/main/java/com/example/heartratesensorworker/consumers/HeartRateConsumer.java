@@ -35,16 +35,21 @@ public class HeartRateConsumer {
     @RabbitListener(queues = {"${rabbitmq.queue.name}"})
     public void consumeMessage(HeartRate heartRate) {
         LOGGER.info(String.format("Received message -> %s", heartRate.toString()));
-        //checkUserSubscribing(heartRate);
-        checkEmergency(heartRate);
-        //storeData(heartRate);
-        //testStoreData();
+        User user = checkUserSubscribing(heartRate);
+        if (user != null) {
+            LOGGER.info(String.format("Registered user"));
+            checkEmergency(heartRate, user);
+            storeData(heartRate);
+            //testStoreData();
+        } else {
+            LOGGER.info(String.format("Unknown user"));
+        }
     }
 
-    private void checkUserSubscribing(HeartRate heartRate) {
+    private User checkUserSubscribing(HeartRate heartRate) {
         LOGGER.info(String.format("Check user subscribing"));
         User user = this.getUser(heartRate.getEmail());
-        LOGGER.info(String.format(user.toString()));
+        return user;
     }
 
     private User getUser(String email) {
@@ -54,9 +59,18 @@ public class HeartRateConsumer {
         return user;
     }
 
-    private void checkEmergency(HeartRate heartRate) {
+    private void checkEmergency(HeartRate heartRate, User user) {
         LOGGER.info(String.format("Check emergency"));
-        emergencyProducer.sendMessage(heartRate);
+        int hr = heartRate.getHeart_rate();
+        if (user.getGender() == 'M') {
+            if (hr > 180 || hr < 40) {
+                emergencyProducer.sendMessage(heartRate);
+            }
+        } else {
+            if (hr > 200 || hr < 60) {
+                emergencyProducer.sendMessage(heartRate);
+            }
+        }
     }
 
     private void storeData(HeartRate heartRate) {
@@ -64,12 +78,11 @@ public class HeartRateConsumer {
         heartRateRepository.save(heartRate);
     }
 
-    private void testStoreData() {
+    /*private void testStoreData() {
         LOGGER.info(String.format("Test store data"));
         List<HeartRate> heartRate = heartRateRepository.findAll();
         for(HeartRate hr: heartRate) {
             LOGGER.info(String.format("Get data stored -> %s", hr.toString()));
         }
-    }
-
+    }*/
 }

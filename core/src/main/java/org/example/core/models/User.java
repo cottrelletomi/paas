@@ -1,4 +1,4 @@
-package com.example.emergencynotificationagent.models;
+package org.example.core.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

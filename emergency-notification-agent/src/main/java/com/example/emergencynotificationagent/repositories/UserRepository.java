@@ -1,6 +1,6 @@
 package com.example.emergencynotificationagent.repositories;
 
-import com.example.emergencynotificationagent.models.User;
+import org.example.core.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

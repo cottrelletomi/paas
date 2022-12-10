@@ -1,6 +1,6 @@
 package com.example.emergencynotificationagent.producers;
 
-import org.example.core.models.UserRedis;
+import org.example.core.models.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -24,9 +24,9 @@ public class NotificationProducer {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void sendMessage(UserRedis userRedis, String routingKey){
-        LOGGER.info(String.format("UserRedis sent -> %s", userRedis.toString()));
-        rabbitTemplate.convertAndSend(exchange, routingKey, userRedis);
+    public void sendMessage(User user, String routingKey){
+        LOGGER.info(String.format("UserRedis sent -> %s", user.toString()));
+        rabbitTemplate.convertAndSend(exchange, routingKey, user);
     }
 
 }
