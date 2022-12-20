@@ -1,4 +1,4 @@
-heart-rate-sensor-data-collector/HELP.md
+**/.DS_Store
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Android ###
+.gradle
+build
+local.properties
