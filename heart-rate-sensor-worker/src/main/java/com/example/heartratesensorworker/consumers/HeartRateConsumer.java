@@ -60,8 +60,8 @@ public class HeartRateConsumer {
     }
 
     private void checkEmergency(HeartRate heartRate, User user) {
-        LOGGER.info(String.format("Check emergency"));
         int hr = heartRate.getHeart_rate();
+        LOGGER.info(user.getFirstname() + ", " + user.getWeight() + "kg, " + user.getAge() + " y, " + hr + " bpm");
         if (user.getGender() == 'M') {
             if(user.getAge() < 26) {
                 if(user.getWeight() < 60) {

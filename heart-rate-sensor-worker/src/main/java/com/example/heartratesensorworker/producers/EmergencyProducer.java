@@ -26,7 +26,7 @@ public class EmergencyProducer {
     }
 
     public void sendMessage(HeartRate heartRate){
-        LOGGER.info(String.format("HeartRate sent -> %s", heartRate.toString()));
+        LOGGER.info(String.format("HeartRate sent"));
         rabbitTemplate.convertAndSend(exchange, routingKey, heartRate);
     }
 
