@@ -63,12 +63,152 @@ public class HeartRateConsumer {
         LOGGER.info(String.format("Check emergency"));
         int hr = heartRate.getHeart_rate();
         if (user.getGender() == 'M') {
-            if (hr > 180 || hr < 40) {
-                emergencyProducer.sendMessage(heartRate);
+            if(user.getAge() < 26) {
+                if(user.getWeight() < 60) {
+                    if(hr > 180 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                } else if(user.getWeight() < 80) {
+                    if(hr > 177 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                } else if(user.getWeight() < 100) {
+                    if(hr > 174 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                } else {
+                    if(hr > 172 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                }
+            } else if(user.getAge() < 51) {
+                if(user.getWeight() < 60) {
+                    if(hr > 168 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                } else if(user.getWeight() < 80) {
+                    if(hr > 165 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                } else if(user.getWeight() < 100) {
+                    if(hr > 163 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                } else {
+                    if(hr > 161 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                }
+            } else if(user.getAge() < 76) {
+                if(user.getWeight() < 60) {
+                    if(hr > 159 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                } else if(user.getWeight() < 80) {
+                    if(hr > 156 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                } else if(user.getWeight() < 100) {
+                    if(hr > 153 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                } else {
+                    if(hr > 150 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                }
+            } else {
+                if (user.getWeight() < 60) {
+                    if (hr > 151 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                } else if (user.getWeight() < 80) {
+                    if (hr > 148 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                } else if (user.getWeight() < 100) {
+                    if (hr > 145 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                } else {
+                    if (hr > 143 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                }
             }
         } else {
-            if (hr > 200 || hr < 60) {
-                emergencyProducer.sendMessage(heartRate);
+            if(user.getAge() < 26) {
+                if(user.getWeight() < 60) {
+                    if(hr > 174 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                } else if(user.getWeight() < 80) {
+                    if(hr > 172 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                } else if(user.getWeight() < 100) {
+                    if(hr > 169 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                } else {
+                    if(hr > 167 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                }
+            } else if(user.getAge() < 51) {
+                if(user.getWeight() < 60) {
+                    if(hr > 165 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                } else if(user.getWeight() < 80) {
+                    if(hr > 162 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                } else if(user.getWeight() < 100) {
+                    if(hr > 160 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                } else {
+                    if(hr > 158 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                }
+            } else if(user.getAge() < 76) {
+                if(user.getWeight() < 60) {
+                    if(hr > 155 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                } else if(user.getWeight() < 80) {
+                    if(hr > 152 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                } else if(user.getWeight() < 100) {
+                    if(hr > 150 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                } else {
+                    if(hr > 147 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                }
+            } else {
+                if (user.getWeight() < 60) {
+                    if (hr > 148 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                } else if (user.getWeight() < 80) {
+                    if (hr > 145 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                } else if (user.getWeight() < 100) {
+                    if (hr > 142 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                } else {
+                    if (hr > 140 || hr < 40) {
+                        emergencyProducer.sendMessage(heartRate);
+                    }
+                }
             }
         }
     }
