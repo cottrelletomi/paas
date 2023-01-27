@@ -34,10 +34,11 @@ public class HeartRateConsumer {
 
     @RabbitListener(queues = {"${rabbitmq.queue.name}"})
     public void consumeMessage(HeartRate heartRate) {
+        LOGGER.info("------------------------------------------------------------------");
         LOGGER.info(String.format("Received message -> %s", heartRate.toString()));
         User user = checkUserSubscribing(heartRate);
         if (user != null) {
-            LOGGER.info(String.format("Registered user"));
+            //LOGGER.info(String.format("Registered user"));
             checkEmergency(heartRate, user);
             storeData(heartRate);
             //testStoreData();
@@ -47,7 +48,7 @@ public class HeartRateConsumer {
     }
 
     private User checkUserSubscribing(HeartRate heartRate) {
-        LOGGER.info(String.format("Check user subscribing"));
+        //LOGGER.info(String.format("Check user subscribing"));
         User user = this.getUser(heartRate.getEmail());
         return user;
     }
@@ -214,7 +215,7 @@ public class HeartRateConsumer {
     }
 
     private void storeData(HeartRate heartRate) {
-        LOGGER.info(String.format("Store data"));
+        //LOGGER.info(String.format("Store data"));
         heartRateRepository.save(heartRate);
     }
 

@@ -7,7 +7,7 @@ index = 0
 baseHr = 140
 
 def randomHr(hr) :
-    hrR = hr + random.randint(0,40)
+    hrR = hr + random.randint(0,50)
     print(hrR)
     return hrR
 

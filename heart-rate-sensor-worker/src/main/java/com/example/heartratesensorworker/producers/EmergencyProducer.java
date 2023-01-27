@@ -26,7 +26,7 @@ public class EmergencyProducer {
     }
 
     public void sendMessage(HeartRate heartRate){
-        LOGGER.info(String.format("HeartRate sent"));
+        LOGGER.info(String.format("WARNING HR TOO HIGH ! Notification sent"));
         rabbitTemplate.convertAndSend(exchange, routingKey, heartRate);
     }
 
